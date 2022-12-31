@@ -81,10 +81,12 @@ class SaveVecNormalizeCallback(BaseCallback):
 
     def _on_step(self) -> bool:
         if self.n_calls % self.save_freq == 0:
-            if self.name_prefix is not None:
-                path = os.path.join(self.save_path, f"{self.name_prefix}_{self.num_timesteps}_steps.pkl")
-            else:
-                path = os.path.join(self.save_path, "vecnormalize.pkl")
+
+            filename = f"vecnormalize_{self.num_timesteps}_steps.pkl"
+            if self.name_prefix is not None: 
+                filename = f"{self.name_prefix}_{filename}"
+            path = os.path.join(self.save_path, filename)
+
             if self.model.get_vec_normalize_env() is not None:
                 self.model.get_vec_normalize_env().save(path)
                 if self.verbose > 1:
