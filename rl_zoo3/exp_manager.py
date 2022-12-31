@@ -596,7 +596,10 @@ class ExperimentManager:
         spec = gym.spec(self.env_name.gym_id)
 
         def make_env(**kwargs) -> gym.Env:
-            env = spec.make(**kwargs)
+            try:
+                env = spec.make(**(kwargs | {'eval' : eval_env}))
+            except:
+                env = spec.make(**kwargs)
             return env
 
         # On most env, SubprocVecEnv does not help and is quite memory hungry
