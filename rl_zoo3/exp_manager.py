@@ -303,7 +303,7 @@ class ExperimentManager:
         elif self._is_atari:
             hyperparams = hyperparams_dict["atari"]
         else:
-            raise ValueError(f"Hyperparameters not found for {self.algo}-{self.env_name.gym_id} in {self.config}")
+            hyperparams = hyperparams_dict
 
         if self.custom_hyperparams is not None:
             # Overwrite hyperparams if needed
