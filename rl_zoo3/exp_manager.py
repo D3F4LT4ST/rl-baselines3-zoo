@@ -599,7 +599,7 @@ class ExperimentManager:
 
         def make_env(**kwargs) -> gym.Env:
             try:
-                env = spec.make(**(kwargs | {'eval' : eval_env}))
+                env = spec.make(**(kwargs.update({'eval' : eval_env})))
             except:
                 env = spec.make(**kwargs)
             return env
